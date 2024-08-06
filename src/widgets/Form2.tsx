@@ -14,19 +14,6 @@ const Form = styled.form`
   border: 1px solid black;
   padding: 32px;
 
-  .label {
-    display: block;
-    margin-bottom: 4px;
-    font-weight: bold;
-  }
-  .input {
-    width: 100%;
-    height: 28px;
-    margin-bottom: 12px;
-    margin-right: 8px;
-    border-radius: 4px;
-  }
-
   .next {
     background-color: green;
     border: 1px solid green;

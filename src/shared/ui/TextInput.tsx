@@ -1,4 +1,5 @@
 import React from "react"
+import styled from "styled-components"
 
 interface TextInputProps {
   name: string
@@ -9,6 +10,20 @@ interface TextInputProps {
   type?: string
 }
 
+const Container = styled.div`
+  .label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+  .input {
+    width: 100%;
+    height: 28px;
+    margin-bottom: 12px;
+    margin-right: 8px;
+    border-radius: 4px;
+  }
+`
 const TextInput: React.FC<TextInputProps> = ({
   name,
   value,
@@ -17,7 +32,7 @@ const TextInput: React.FC<TextInputProps> = ({
   error,
   type = "text",
 }) => (
-  <div>
+  <Container>
     <label className="label">{label}</label>
     <input
       className="input"
@@ -29,7 +44,7 @@ const TextInput: React.FC<TextInputProps> = ({
       required
     />
     {error && <span>{error}</span>}
-  </div>
+  </Container>
 )
 
 export default TextInput

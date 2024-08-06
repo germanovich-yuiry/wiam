@@ -3,6 +3,14 @@ import styled from "styled-components"
 
 const Container = styled.div`
   margin-bottom: 12px;
+  .label {
+    display: block;
+    margin-bottom: 4px;
+  }
+  .input {
+    margin-bottom: 12px;
+    margin-right: 8px;
+  }
 `
 
 const Value = styled.span`
@@ -32,8 +40,9 @@ const RangeInput: React.FC<RangeInputProps> = ({
 
   return (
     <Container>
-      <label>{label}</label>
+      <label className="label">{label}</label>
       <input
+        className="input"
         type="range"
         min={min}
         max={max}

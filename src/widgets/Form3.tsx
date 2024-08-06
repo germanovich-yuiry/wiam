@@ -15,20 +15,6 @@ const Form = styled.form`
   border: 1px solid black;
   padding: 32px;
 
-  label {
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  input {
-    margin-bottom: 12px;
-    margin-right: 8px;
-  }
-
-  .value {
-    font-weight: bold;
-  }
-
   .next {
     background-color: green;
     border: 1px solid green;
