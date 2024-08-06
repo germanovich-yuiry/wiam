@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import InputMask from "react-input-mask"
 
+import type { IForm1Props } from "../types/Form1.type"
+
 const Form = styled.form`
   width: 320px;
   height: auto;
@@ -54,16 +56,18 @@ const ButtonBlock = styled.div`
   margin-top: 24px;
 `
 
-const Form1 = ({ formData, setFormData }) => {
+const Form1: React.FC<IForm1Props> = ({ formData, setFormData }) => {
   const navigate = useNavigate()
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState<{ [key: string]: string }>({})
 
-  const handleChange = e => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   const validate = () => {
-    const newErrors = {}
+    const newErrors: { [key: string]: string } = {}
     if (!formData.phone) newErrors.phone = "Телефон обязателен."
     if (!formData.firstName) newErrors.firstName = "Имя обязательно."
     if (!formData.lastName) newErrors.lastName = "Фамилия обязательна."
@@ -71,7 +75,7 @@ const Form1 = ({ formData, setFormData }) => {
     return newErrors
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const newErrors = validate()
     if (Object.keys(newErrors).length > 0) {
@@ -86,7 +90,7 @@ const Form1 = ({ formData, setFormData }) => {
       <div>
         <label className="label">Телефон</label>
         <InputMask
-          className="input" // Добавляем класс для стилизации
+          className="input"
           mask="8 999 999 9999"
           name="phone"
           onChange={handleChange}
@@ -132,7 +136,7 @@ const Form1 = ({ formData, setFormData }) => {
           onChange={handleChange}
           required
         >
-          <option>Выберите пол</option>
+          <option value="">Выберите пол</option>
           <option value="male">Мужской</option>
           <option value="female">Женский</option>
         </select>

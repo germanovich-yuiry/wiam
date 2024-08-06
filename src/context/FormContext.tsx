@@ -1,9 +1,14 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, FC } from "react"
+import { IFormData } from "../types/FormData.type"
 
-const FormContext = createContext();
+import { IFormContext } from "../types/FormContext.type"
 
-export const FormProvider = ({ children }) => {
-  const [formData, setFormData] = useState({
+const FormContext = createContext<IFormContext | undefined>(undefined)
+
+export const FormProvider: FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [formData, setFormData] = useState<IFormData>({
     phone: "",
     firstName: "",
     lastName: "",
@@ -12,13 +17,19 @@ export const FormProvider = ({ children }) => {
     address: "",
     loanAmount: 200,
     loanTerm: 10,
-  });
+  })
 
   return (
     <FormContext.Provider value={{ formData, setFormData }}>
       {children}
     </FormContext.Provider>
-  );
-};
+  )
+}
 
-export const useForm = () => useContext(FormContext);
+export const useForm = () => {
+  const context = useContext(FormContext)
+  if (context === undefined) {
+    throw new Error("useForm must be used within a FormProvider")
+  }
+  return context
+}

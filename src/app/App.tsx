@@ -1,5 +1,7 @@
 import { useState } from "react"
 
+import { IFormData } from "../types/FormData.type"
+
 import styled from "styled-components"
 
 import {
@@ -24,7 +26,7 @@ const Container = styled.div`
 `
 
 function App() {
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState<IFormData>({})
 
   return (
     <Container>

@@ -1,74 +1,78 @@
-import React from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
 
+import type { IForm3Props } from "../types/Form3.type"
+import axios from "axios"
 import styled from "styled-components"
 
 import PortalModal from "../shared/ui/Portal"
 import Note from "../shared/ui/Note"
 
-const Form3 = ({ formData, setFormData }) => {
-  const navigate = useNavigate()
-  const [loanAmount, setLoanAmount] = React.useState(200)
-  const [loanTerm, setLoanTerm] = React.useState(10)
-  const [showModal, setShowModal] = React.useState(false)
+const Form = styled.form`
+  width: 320px;
+  height: auto;
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid black;
+  padding: 32px;
 
-  const handleSubmit = async e => {
+  label {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .input {
+    margin-bottom: 12px;
+    margin-right: 8px;
+  }
+
+  .value {
+    font-weight: bold;
+  }
+
+  .next {
+    background-color: green;
+    border: 1px solid green;
+    border-radius: 12px;
+    padding: 8px;
+    color: white;
+  }
+
+  .prev {
+    border: 1px solid orange;
+    background-color: orange;
+    padding: 8px;
+    border-radius: 12px;
+    margin-right: 12px;
+    color: white;
+  }
+
+  .effect {
+    opacity: 100%;
+  }
+
+  .effect:hover {
+    opacity: 95%;
+  }
+`
+
+const ButtonBlock = styled.div`
+  margin-top: 12px;
+`
+
+const Form3: React.FC<IForm3Props> = ({ formData }) => {
+  const navigate = useNavigate()
+  const [loanAmount, setLoanAmount] = useState<number>(200)
+  const [loanTerm, setLoanTerm] = useState<number>(10)
+  const [showModal, setShowModal] = useState<boolean>(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const response = await axios.post("https://dummyjson.com/products/add", {
+    await axios.post("https://dummyjson.com/products/add", {
       title: `${formData.firstName} ${formData.lastName}`,
     })
     setShowModal(true)
   }
-
-  const Form = styled.form`
-    width: 320px;
-    height: auto;
-    background-color: white;
-    border-radius: 20px;
-    border: 1px solid black;
-    padding: 32px;
-
-    label {
-      display: block;
-      margin-bottom: 4px;
-    }
-    .input {
-      margin-bottom: 12px;
-      margin-right: 8px;
-    }
-    .loan-term {
-    }
-    .value {
-      font-weight: bold;
-    }
-    .next {
-      background-color: green;
-      border: 1px solid green;
-      border-radius: 12px;
-      padding: 8px;
-      color: white;
-    }
-    .prev {
-      border: 1px solid orange;
-      background-color: orange;
-      padding: 8px;
-      border-radius: 12px;
-      margin-right: 12px;
-      color: white;
-    }
-
-    .effect {
-      opacity: 100%;
-    }
-    .effect: hover {
-      opacity: 95%;
-    }
-  `
-
-  const ButtonBlock = styled.div`
-    margin-top: 12px;
-  `
 
   return (
     <div>
@@ -83,7 +87,7 @@ const Form3 = ({ formData, setFormData }) => {
             step="100"
             value={loanAmount}
             id="sum"
-            onChange={e => setLoanAmount(e.target.value)}
+            onChange={e => setLoanAmount(Number(e.target.value))}
           />
           <span className="value">{loanAmount}</span>
         </div>
@@ -97,7 +101,7 @@ const Form3 = ({ formData, setFormData }) => {
             step="1"
             value={loanTerm}
             id="loan-term"
-            onChange={e => setLoanTerm(e.target.value)}
+            onChange={e => setLoanTerm(Number(e.target.value))}
           />
           <span className="value">{loanTerm}</span>
         </div>

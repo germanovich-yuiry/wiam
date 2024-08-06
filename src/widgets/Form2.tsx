@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react"
+import type { FC } from "react"
+import type { IForm2Props } from "../types/Form2.type"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import styled from "styled-components"
@@ -52,7 +54,7 @@ const ButtonBlock = styled.div`
   margin-top: 12px;
 `
 
-const Form2 = ({ formData, setFormData }) => {
+const Form2: FC<IForm2Props> = ({ formData, setFormData }) => {
   const navigate = useNavigate()
   const [workplaces, setWorkplaces] = useState([])
   const [errors, setErrors] = useState({})
