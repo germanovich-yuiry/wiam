@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import InputMask from "react-input-mask"
+import MaskedInput from "../shared/ui/MaskedInput"
+import TextInput from "../shared/ui/TextInput"
+import SelectInput from "../shared/ui/SelectInput"
 
 import type { IForm1Props } from "../types/Form1.type"
 
@@ -87,61 +89,39 @@ const Form1: React.FC<IForm1Props> = ({ formData, setFormData }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <div>
-        <label className="label">Телефон</label>
-        <InputMask
-          className="input"
-          mask="8 999 999 9999"
-          name="phone"
-          onChange={handleChange}
-          required
-        />
-        {errors.phone && <span>{errors.phone}</span>}
-      </div>
-      <div>
-        <label className="label" htmlFor="firstname">
-          Имя
-        </label>
-        <input
-          className="input"
-          id="firstname"
-          type="text"
-          name="firstName"
-          onChange={handleChange}
-          required
-        />
-        {errors.firstName && <span>{errors.firstName}</span>}
-      </div>
-      <div>
-        <label htmlFor="lastname" className="label">
-          Фамилия
-        </label>
-        <input
-          className="input"
-          id="lastname"
-          type="text"
-          name="lastName"
-          onChange={handleChange}
-          required
-        />
-        {errors.lastName && <span>{errors.lastName}</span>}
-      </div>
-      <div>
-        <label className="label" htmlFor="gender">
-          Пол
-        </label>
-        <select
-          className="input"
-          name="gender"
-          onChange={handleChange}
-          required
-        >
-          <option value="">Выберите пол</option>
-          <option value="male">Мужской</option>
-          <option value="female">Женский</option>
-        </select>
-        {errors.gender && <span>{errors.gender}</span>}
-      </div>
+      <MaskedInput
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        label="Телефон"
+        error={errors.phone}
+        mask="8 999 999 9999"
+      />
+      <TextInput
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleChange}
+        label="Имя"
+        error={errors.firstName}
+      />
+      <TextInput
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleChange}
+        label="Фамилия"
+        error={errors.lastName}
+      />
+      <SelectInput
+        name="gender"
+        value={formData.gender}
+        onChange={handleChange}
+        label="Пол"
+        error={errors.gender}
+        options={[
+          { value: "male", label: "Мужской" },
+          { value: "female", label: "Женский" },
+        ]}
+      />
       <ButtonBlock>
         <button className="next" type="submit">
           Далее
