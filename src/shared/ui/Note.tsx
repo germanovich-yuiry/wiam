@@ -12,6 +12,10 @@ const NoteContainer = styled.h2`
   font-family: "Regular";
   font-size: 18px;
   box-shadow: -2px -2px 16px 1px rgba(255, 255, 255, 0.3);
+  .warning {
+    font-weight: bold;
+    color: orange;
+  }
 `
 
 const Note: React.FC<INoteProps> = ({
@@ -22,7 +26,9 @@ const Note: React.FC<INoteProps> = ({
 }) => {
   return (
     <NoteContainer>
-      {`Поздравляем, ${lastName} ${firstName}! Вам одобрена сумма ${loanAmount}$ на ${loanTerm} дней`}
+      {`Поздравляем, ${lastName} ${firstName}! Вам одобрена сумма `}
+      <span className="warning">${loanAmount} </span>
+      {`на ${loanTerm} дней`}
     </NoteContainer>
   )
 }
