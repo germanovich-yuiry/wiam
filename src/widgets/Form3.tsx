@@ -1,12 +1,11 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-
-import type { IForm3Props } from "../types/Form3.type"
 import axios from "axios"
 import styled from "styled-components"
 
 import PortalModal from "../shared/ui/Portal"
 import Note from "../shared/ui/Note"
+import RangeInput from "../shared/ui/RangeInput"
 
 const Form = styled.form`
   width: 320px;
@@ -21,7 +20,7 @@ const Form = styled.form`
     margin-bottom: 4px;
   }
 
-  .input {
+  input {
     margin-bottom: 12px;
     margin-right: 8px;
   }
@@ -77,34 +76,22 @@ const Form3: React.FC<IForm3Props> = ({ formData }) => {
   return (
     <div>
       <Form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="sum">Сумма займа</label>
-          <input
-            className="input"
-            type="range"
-            min="200"
-            max="1000"
-            step="100"
-            value={loanAmount}
-            id="sum"
-            onChange={e => setLoanAmount(Number(e.target.value))}
-          />
-          <span className="value">{loanAmount}</span>
-        </div>
-        <div>
-          <label htmlFor="loan-term">Срок займа (дни)</label>
-          <input
-            className="input"
-            type="range"
-            min="10"
-            max="30"
-            step="1"
-            value={loanTerm}
-            id="loan-term"
-            onChange={e => setLoanTerm(Number(e.target.value))}
-          />
-          <span className="value">{loanTerm}</span>
-        </div>
+        <RangeInput
+          label="Сумма займа"
+          min={200}
+          max={1000}
+          step={100}
+          value={loanAmount}
+          onChange={setLoanAmount}
+        />
+        <RangeInput
+          label="Срок займа (дни)"
+          min={10}
+          max={30}
+          step={1}
+          value={loanTerm}
+          onChange={setLoanTerm}
+        />
         <ButtonBlock>
           <button
             className="prev effect"
