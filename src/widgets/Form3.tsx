@@ -6,6 +6,7 @@ import styled from "styled-components"
 import PortalModal from "../shared/ui/Portal"
 import Note from "../shared/ui/Note"
 import RangeInput from "../shared/ui/RangeInput"
+import { IForm3Props } from "../types/Form3.type"
 
 const Form = styled.form`
   width: 320px;

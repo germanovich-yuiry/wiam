@@ -26,7 +26,16 @@ const Container = styled.div`
 `
 
 function App() {
-  const [formData, setFormData] = useState<IFormData>({})
+  const [formData, setFormData] = useState<IFormData>({
+    phone: "",
+    firstName: "",
+    lastName: "",
+    gender: "",
+    workplace: "",
+    address: "",
+    loanAmount: 0,
+    loanTerm: 0,
+  })
 
   return (
     <Container>
