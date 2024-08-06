@@ -1,6 +1,11 @@
 import styled from "styled-components"
 
-import type { INoteProps } from "../../types/Note.type"
+interface INoteProps {
+  lastName: string
+  firstName: string
+  loanAmount: number
+  loanTerm: number
+}
 
 const NoteContainer = styled.h2`
   width: auto;
