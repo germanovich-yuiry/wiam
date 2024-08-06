@@ -26,12 +26,14 @@ const OverlayContainer = styled.div`
 const CloseButton = styled.button`
   background: transparent;
   border: none;
-  font-size: 24px;
+  font-size: 48px;
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
   z-index: 2;
+  color: white;
+  text-shadow: 1px 1px 8px white;
 `
 
 const PortalModal: FC<Props> = ({ children, open, onClose }) => {
